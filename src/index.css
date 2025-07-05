@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .text-gold-500 {
+    color: #d4af37;
+  }
+
+  .bg-gold-500 {
+    background-color: #d4af37;
+  }
+
+  .hover\:bg-gold-600:hover {
+    background-color: #c9a227;
+  }
+
+  .border-gold-500 {
+    border-color: #d4af37;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c9a227;
+}
+
+/* menu icon */
+.mobile-menu {
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-item {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
