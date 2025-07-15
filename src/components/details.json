@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Dosa",
+    "description": "South Indian Special",
+    "image": "https://your-backend-api.com/uploads/dosa.png"
+  },
+  {
+    "id": 2,
+    "name": "Pizza",
+    "description": "Italian Delight",
+    "image": "https://your-backend-api.com/uploads/pizza.png"
+  }
+]

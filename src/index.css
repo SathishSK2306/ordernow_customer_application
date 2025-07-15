@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #d4af37;
+  --color-secondary: #f0c75e;
+  --color-accent: #8a6d3b;
+  --color-background: #fffdf7;
+  --color-text: #333333;
+}
+
+@layer components {
+  .text-gold-500 {
+    color: var(--color-primary);
+  }
+
+  .bg-gold-500 {
+    background-color: var(--color-primary);
+  }
+
+  .hover\:bg-gold-600:hover {
+    background-color: var(--color-accent);
+  }
+
+  .border-gold-500 {
+    border-color: var(--color-primary);
+  }
+  
+  .bg-gold-50 {
+    background-color: var(--color-background);
+    opacity: 0.5;
+  }
+  
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* menu icon */
+.mobile-menu {
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-item {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* Price range slider styling */
+.slider-thumb::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.slider-thumb::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading skeleton animation */
+@keyframes skeleton-loading {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-pulse {
+  animation: skeleton-loading 2s ease-in-out infinite;
+}
