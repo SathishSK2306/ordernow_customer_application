@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const HeroSlider = () => {
   const [slides, setSlides] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
 
   useEffect(() => {
-    // Fetch slides data (including images and content) from backend API
     fetch("https://68767541814c0dfa653c2c85.mockapi.io/slider")
       .then((res) => res.json())
       .then((data) => setSlides(data))
@@ -18,12 +19,42 @@ const HeroSlider = () => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
-
     return () => clearInterval(interval);
   }, [slides.length]);
 
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    const diff = touchStartX.current - touchEndX.current;
+
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        // Swipe Left
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+      } else {
+        // Swipe Right
+        setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+      }
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
   return (
-    <div className="relative h-[70vh] overflow-hidden">
+    <div
+      className="relative h-[70vh] overflow-hidden"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       {slides.map((slide, index) => (
         <motion.div
           key={slide.id}
@@ -67,7 +98,7 @@ const HeroSlider = () => {
               transition={{ delay: 0.9 }}
               className="bg-gray-800 hover:bg-gold-600 text-white px-8 py-3 rounded-md text-lg font-semibold"
             >
-              {slide.buttonText}Claim Your Meal
+              {slide.buttonText || "Claim Your Meal"}
             </motion.button>
           </div>
         </motion.div>
